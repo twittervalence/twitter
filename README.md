@@ -51,3 +51,8 @@ Check python package versions in terminal
 `>>> import tweepy`
 
 `>>> print 'tweepy version: %s' %tweepy.__version__`
+
+## Additional Notes
+
+&#10033; This [site](https://boundingbox.klokantech.com/) was used to derive boudingbox coordinates.
+
