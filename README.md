@@ -1,6 +1,5 @@
 # Twitter Valence
 
-
 ## To use
 
 * Clone the repo: `git clone https://github.com/twittervalence/twitter.git`
@@ -25,19 +24,23 @@
 
 * Push changes on branch to: `git push origin <branch_name>` [Remove angle brackets]
 
+### FIXING ISSUES
 
+* Remove remote commits until this point's commit id: `git push origin +eb7b86e^:master`
+
+* Reset to branch of parent commit: `git reset HEAD^ --hard`
+
+* Force push to remote: `git push origin -f`
 
 ## Libraries Used
 
-&rightarrow; `sudo pip install tweepy`
+&rightarrow; `pip install tweepy`
 
-
+&rightarrow; `pip install msgpack` [ __tweepy needs this__]
 
 * Upgrade pip using: `sudo pip install --upgrade pip`
 
 * To list local installed python modules: `pydoc modules`
-
-
 
 [TwitterValence](#)
 
