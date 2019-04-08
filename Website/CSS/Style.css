@@ -1,0 +1,20 @@
+footer {
+	position:fixed;
+	bottom:0;
+	width:100%;
+	padding: 10px;
+	background-color: #555;
+	color: white;
+	text-align:right;
+	}
+.header{
+	padding: 8px;
+	}
+#Map-View{
+	width:100%;
+	height:530px;
+}
+#Info-View{
+	width:100%;
+	height:489px;
+}
