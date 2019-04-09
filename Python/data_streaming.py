@@ -17,7 +17,7 @@ print(api)
 
 class Stdoutlistener_file_version(streaming.StreamListener):
     def on_data(self, data):
-        with open('tweets.json', 'a', encoding='utf-8') as f:
+        with open('/var/www/example.com/public_html/twittervalence/Python/Data/tweets.json', 'a', encoding='utf-8') as f:
             f.write(data)
     def on_error(self, status):
         print(status)
@@ -36,7 +36,7 @@ while True:
         stream.filter(locations = Vienna_boundingbox, languages=['en,de']) # search using boudary box and language
         break
     except Exception as e:
-        print('Sleep for 30 senconds when exception is raised')
+        print('Sleep for 30 seconds when exception is raised')
         nsecs=random.randint(30,31)
         time.sleep(nsecs)
          
