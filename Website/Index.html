@@ -24,21 +24,30 @@
 	<div class="container-fluid">
 		<h2 class="header"> Sentiment Analysis for Twitter Data</h2>
 		<div class="row">
-			<div class="col-lg-7" >
+			<div class="col-lg-2" >
 				<div class="row">
-					<iframe id="Map-View" src="http://goodcitylife.org/chattymaps/"></iframe>
+					<iframe id="Info-View" ></iframe>
 				</div>
 			</div>
-			<div class="col-lg-5" >
+			<div class="col-lg-6" >
 				<div class="row">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#">Word Cloud</a></li>
-						<li><a href="#">Correlation Analysis</a></li>
-						<li><a href="#">Valence Value</a></li>
-					</ul>
+				<ul class="nav nav-pills">
+					<li class="active"><a data-toggle="pill" href="#Vienna">Vienna</a></li>
+					<li><a data-toggle="pill" href="#Munchen">Munchen</a></li>
+					<li><a data-toggle="pill" href="#Brussel">Brussel</a></li>
+				</ul>
 				</div>
 				<div class="row">
-					<iframe id="Info-View" src="http://goodcitylife.org/chattymaps/"></iframe>
+				<div id="myTabContent" class="tab-content">
+					<iframe class="tab-pane fade in active" id="Vienna" src="html/Vienna.html"></iframe>	
+					<iframe class="tab-pane fade" id="Munchen" src="html/Munchen.html"></iframe>	
+					<iframe class="tab-pane fade" id="Brussel" src="html/Brussel.html"></iframe>	
+				</div>	
+				</div>
+			</div>
+			<div class="col-lg-4" >
+				<div class="row">
+					<iframe id="Info-View"></iframe>
 				</div>
 			</div>
 		</div>

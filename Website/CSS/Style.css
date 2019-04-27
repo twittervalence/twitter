@@ -10,11 +10,19 @@ footer {
 .header{
 	padding: 8px;
 	}
-#Map-View{
+#Vienna{
 	width:100%;
-	height:530px;
+	height:489px;
+}
+#Munchen{
+	width:100%;
+	height:489px;
+}
+#Brussel{
+	width:100%;
+	height:489px;
 }
 #Info-View{
 	width:100%;
-	height:489px;
+	height:530px;
 }
