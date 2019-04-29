@@ -4,6 +4,7 @@ import string
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import re
+import psycopg2
 
 #HappyEmoticons
 emoticons_happy = set([
@@ -29,6 +30,25 @@ emoji_pattern = re.compile("["
          u"\U00002702-\U000027B0"
          u"\U000024C2-\U0001F251"
          "]+", flags=re.UNICODE)
+# the template. where data from the csv will be formatted to geojson
+template = \
+   ''' \
+   { "type" : "Feature",
+       "geometry" : {
+           "type" : "Point",
+           "coordinates" : [%s, %s]},
+       "properties" : { "id" : %s, "Time" : "%s", "polarity": "%s","subjectivity": "%s"}
+       },
+   '''
+
+
+# the head of the geojson file
+output = \
+   ''' \
+
+{ "type" : "Feature Collection",
+   "features" : [
+   '''
 
 def clean_tweets(tweet):
     tweet = str(tweet)
@@ -51,11 +71,11 @@ def clean_tweets(tweet):
         if w not in stop_words and w not in emoticons and w not in string.punctuation:
             filtered_tweet.append(w)
     return ' '.join(filtered_tweet)
-
-with open('Brussel.csv', 'r',encoding='utf-8') as csvFile:
-    with open('Brussel_new.csv', 'w', encoding='utf-8') as NewFile:
+'''
+with open('Vienna.csv', 'r',encoding='utf-8') as csvFile:
+    with open('test.csv', 'w', encoding='utf-8') as NewFile:
         fieldnames = ['user_id','time','lang','text','arc_id','x','y','polarity','subjectivity']
-        writer = csv.DictWriter(NewFile, delimiter=';',fieldnames=fieldnames,extrasaction='ignore')
+        writer = csv.DictWriter(NewFile, delimiter=';',fieldnames=fieldnames)
         writer.writeheader()
         reader = csv.DictReader(csvFile)
         for row in reader:
@@ -71,3 +91,54 @@ with open('Brussel.csv', 'r',encoding='utf-8') as csvFile:
             print(dict(row))
 NewFile.close()
 csvFile.close()
+'''
+try:
+    connection = psycopg2.connect(user="postgres",
+                                  password="postgres",
+                                  host="127.0.0.1",
+                                  port="5432",
+                                  database="LBS")
+    cursor = connection.cursor()
+    postgreSQL_select_Query = "select * from Vienna"
+    cursor.execute(postgreSQL_select_Query)
+    records = cursor.fetchall()
+    for row in records:
+        # print(row['text'])
+        clean_text = clean_tweets(row[3])
+        if  clean_text != '':
+            # print (clean_text)
+            blob = TextBlob(clean_text)
+            Sentiment = blob.sentiment
+            id = row[0]
+            lat = row[6]
+            lon = row[5]
+            Time = row[1]
+            #msgtext = clean_text
+            polarity = Sentiment.polarity
+            subjectivity = Sentiment.subjectivity
+            print(polarity, subjectivity)
+            # output += template % (row[0], row[2], row[1], row[3], row[4])
+            output += template % (lon, lat, id, Time, polarity, subjectivity)
+
+        # the tail of the geojson file
+    output += \
+        ''' \
+        ]
+
+     }
+        '''
+except (Exception, psycopg2.Error) as error:
+    print("Error while fetching data from PostgreSQL", error)
+finally:
+    # closing database connection.
+    if (connection):
+        cursor.close()
+        connection.close()
+        print("PostgreSQL connection is closed")
+# opens an geoJSON file to write the output
+
+outFileHandle = open("Vienna_tweet.json", "w", encoding='utf-8')
+outFileHandle.write(output)
+outFileHandle.close()
+
+
