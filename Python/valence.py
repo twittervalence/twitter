@@ -3,9 +3,11 @@ import csv
 
 
 
-with open('Data/munich.csv','r') as csvinput:
-    with open('Data/munich_new.csv', 'w') as csvoutput:
-        writer = csv.writer(csvoutput, lineterminator='\n')
+with open('../Data/munich.csv','r') as csvinput:
+    with open('./Data/munich_new.csv', 'w') as csvoutput:
+        fieldnames = ['user_id','time','lang','text','arc_id','x','y','polarity','subjectivity']
+
+        writer = csv.writer(csvoutput, fieldnames=fieldnames, lineterminator='\n')
         reader = csv.reader(csvinput)
         text_blob = TextBlob(csvinput['text'])
         polarity = text_blob.polarity
