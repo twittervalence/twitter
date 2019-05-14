@@ -1,19 +1,21 @@
 $(document).ready(function(){
-	var map = L.map('map').setView([48.137154, 11.576124], 11);
-	
 	var Basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ',
 			id: 'mapbox.light'
-		}).addTo(map);
+		});
 	
 	var boundary = L.geoJSON(Munchen,{
 		style: {
 			color: "#000",
 			fillcolor: '#FFFAFA'
 		}
-	}).addTo(map);
-	
+	});
+	var map = L.map('map', {
+		center: [48.137154, 11.576124],
+		zoom: 11,
+		layers: [Basemap]
+	});
 	var pointstyle_1 = {
         // Stroke properties
         color: '#5EA4D4',
@@ -63,6 +65,77 @@ $(document).ready(function(){
 			}
         }
 		
-	}).addTo(map);
+	});
+	var baseMaps = {
+		"Grayscale": Basemap
+	};
+	var Boundary = {
+		"Boundary": boundary
+	}
+	//Heatmap layer
+	
+	var cfg = {
+		  "radius": 0.005,
+		  "maxOpacity": .8, 
+		  "scaleRadius": true, 
+		  "useLocalExtrema": true,
+		  latField: 'lat',
+		  lngField: 'lng',
+		  valueField: 'polarity'
+	};
+	var positive_heatmapLayer =L.geoJSON(Munchen,{
+		style: {
+			color: "#000",
+			fillcolor: '#FFFAFA'
+		}
+	});
+	var negative_heatmapLayer = L.geoJSON(Munchen,{
+		style: {
+			color: "#000",
+			fillcolor: '#FFFAFA'
+		}
+	});
+	var Heatmap = {
+			"Positive-Heatmap":  positive_heatmapLayer,
+			//"Negative-Heamap":  negative_heatmapLayer
+			//"Map-algera"
+		};
+	var MapControl = L.control.layers(baseMaps,Heatmap).addTo(map);
+	Data_Selection = function( {label, value}) {
+		var Heatmap_data = {
+			max: 5,
+			data: []
+		};
+		for (var i=0;i<Munich_time.length;i++)
+		{
+			var point_polarity = Number(Munich_time[i].features.properties.polarity);
+			var time = Munich_time[i].features.properties.month;
+			if (point_polarity>0 && time == value){
+				var point_lat = Munich_time[i].features.geometry.coordinates[0];
+				var point_lng = Munich_time[i].features.geometry.coordinates[1];
+				var point_need = {
+					lat : point_lng,
+					lng : point_lat,
+					polarity : point_polarity
+				};
+				Heatmap_data.data.push(point_need);
+			}	
+		}
+		MapControl.removeLayer(positive_heatmapLayer);
+		map.removeLayer(positive_heatmapLayer);
+		positive_heatmapLayer = new HeatmapOverlay(cfg);
+		positive_heatmapLayer.setData(Heatmap_data);
+		MapControl.addOverlay(positive_heatmapLayer,"Positive-Heatmap");
+		map.addLayer(positive_heatmapLayer);
+	};
+	var TimeSlider = L.control.timelineSlider({
+            timelineItems: ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+            labelWidth: "30px",
+			betweenLabelAndRangeSpace:"15px",
+			labelFontSize: "15px",
+			backgroundOpacity: 0,
+			position:"bottomleft",
+			changeMap: Data_Selection 
+		}).addTo(map);
 })
 	

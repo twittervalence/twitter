@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	//load json data
-	
 	//Basemap layer
 	var Basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 			maxZoom: 18,
@@ -14,7 +12,11 @@ $(document).ready(function(){
 			fillcolor: '#FFFAFA'
 		}
 	});
-		
+	var map = L.map('map', {
+		center: [50.8505,4.3488],
+		zoom: 11,
+		layers: [Basemap]
+	});	
 	//Sentiment points layer
 	var pointstyle_1 = {
 		// Stroke properties
@@ -59,24 +61,76 @@ $(document).ready(function(){
 			}
 		}
 	});		
-	//Heatmap layer
-		
 	var baseMaps = {
-		"Grayscale": Basemap,
+		"Grayscale": Basemap
 	};
-	var overlayMaps = {
-		//"Twitter Points":point,
+	var Boundary = {
 		"Boundary": boundary
+	}
+	//Heatmap layer
+	
+	var cfg = {
+		  "radius": 0.005,
+		  "maxOpacity": .8, 
+		  "scaleRadius": true, 
+		  "useLocalExtrema": true,
+		  latField: 'lat',
+		  lngField: 'lng',
+		  valueField: 'polarity'
 	};
-		
-	var map = L.map('map', {
-		center: [50.8505,4.3488],
-		zoom: 11,
-		layers: [Basemap]
+	var positive_heatmapLayer =L.geoJSON(Brussel,{
+		style: {
+			color: "#000",
+			fillcolor: '#FFFAFA'
+		}
 	});
-	L.control.layers(baseMaps,overlayMaps).addTo(map);
-	$.getScript("Heatmap.js", function(){
-		alert("Script loaded but not necessarily executed.");
+	var negative_heatmapLayer = L.geoJSON(Brussel,{
+		style: {
+			color: "#000",
+			fillcolor: '#FFFAFA'
+		}
 	});
+	var Heatmap = {
+			"Positive-Heatmap":  positive_heatmapLayer,
+			//"Negative-Heamap":  negative_heatmapLayer
+			//"Map-algera"
+		};
+	var MapControl = L.control.layers(baseMaps,Heatmap).addTo(map);
+	Data_Selection = function( {label, value}) {
+		var Heatmap_data = {
+			max: 5,
+			data: []
+		};
+		for (var i=0;i<Brussel_time.length;i++)
+		{
+			var point_polarity = Number(Brussel_time[i].features.properties.polarity);
+			var time = Brussel_time[i].features.properties.month;
+			if (point_polarity>0 && time == value){
+				var point_lat = Brussel_time[i].features.geometry.coordinates[0];
+				var point_lng = Brussel_time[i].features.geometry.coordinates[1];
+				var point_need = {
+					lat : point_lng,
+					lng : point_lat,
+					polarity : point_polarity
+				};
+				Heatmap_data.data.push(point_need);
+			}	
+		}
+		MapControl.removeLayer(positive_heatmapLayer);
+		map.removeLayer(positive_heatmapLayer);
+		positive_heatmapLayer = new HeatmapOverlay(cfg);
+		positive_heatmapLayer.setData(Heatmap_data);
+		MapControl.addOverlay(positive_heatmapLayer,"Positive-Heatmap");
+		map.addLayer(positive_heatmapLayer);
+	};
+	var TimeSlider = L.control.timelineSlider({
+            timelineItems: ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+            labelWidth: "30px",
+			betweenLabelAndRangeSpace:"15px",
+			labelFontSize: "15px",
+			backgroundOpacity: 0,
+			position:"bottomleft",
+			changeMap: Data_Selection 
+		}).addTo(map);
 })
 	
