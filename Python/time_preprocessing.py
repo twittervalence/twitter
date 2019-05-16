@@ -1,7 +1,5 @@
 import json
-import matplotlib.pyplot as plt
 import pandas as pd
-from dateutil import tz
 from datetime import datetime
 
 
@@ -10,7 +8,7 @@ with open("Vienna_tweet.json") as datafile:
 
 df = pd.DataFrame(data)
 
-# calculate the lenght of records in the file
+# calculate the length of records in the file
 flen = len(df)
 
 for i in range(len(df)):
@@ -20,12 +18,12 @@ for i in range(len(df)):
     date = datetime.strptime(fTime, "%Y-%m-%d %H:%M:%S").date()
     time = datetime.strptime(fTime, "%Y-%m-%d %H:%M:%S").time()
 
-    new_prop['year'] = date.year
-    new_prop['month'] = date.month
-    new_prop['day'] = date.day
-    new_prop['hour'] = time.hour
-    new_prop['min'] = time.minute
-    new_prop['sec'] = time.second
+    new_prop['year'] = str(date.year) # converting to string
+    new_prop['month'] = str(date.month) # converting to string
+    new_prop['day'] = str(date.day) # converting to string
+    new_prop['hour'] = str(time.hour) # converting to string
+    new_prop['min'] = str(time.minute) # converting to string
+    new_prop['sec'] = str(time.second) # converting to string
 
 
-df.to_json(r'Vienna_tweet_time.json', orient='records')
+df.to_json(r'Vienna_tweet_time_new.json', orient='records')
