@@ -128,6 +128,9 @@ $(document).ready(function(){
 		MapControl.addOverlay(positive_heatmapLayer,"Positive-Heatmap");
 		map.addLayer(positive_heatmapLayer);
 	};
+	
+
+	// Timeslider control
 	var TimeSlider = L.control.timelineSlider({
             timelineItems: ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
             labelWidth: "30px",
