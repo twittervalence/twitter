@@ -7,6 +7,7 @@
 	<meta name="keywords" content="Sentiment,Twitter,Visual Analysis">
 	<meta name="author" content="Adebayo,Olga,Lin">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Merriweather|Poppins&display=swap" rel="stylesheet"> 
 	<!--CSS-->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -17,38 +18,120 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="../Website/Scripts/Vienna.js"></script>
 	
 </head>  
 
 <body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Brand</a>
+			</div>
+		
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#"> Home <span class="sr-only">(current)</span></a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#about">About</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+
 	<div class="container-fluid">
-		<h2 class="header"> Sentiment Analysis for Twitter Data</h2>
+		<h3 class="header text-right"> Sentiment Analysis of Twitter Data</h3>
 		<div class="row">
-			<div class="col-lg-7 col-md-6 col-sm-12">
+			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="row">
-				<ul class="nav nav-pills">
-					<li class="active"><a data-toggle="pill" href="#Vienna">Vienna</a></li>
-					<li><a data-toggle="pill" href="#Munchen">Munchen</a></li>
-					<li><a data-toggle="pill" href="#Brussel">Brussel</a></li>
-				</ul>
+					<ul class="nav nav-pills">
+						<li class="active"><a data-toggle="pill" href="#Vienna">Vienna</a></li>
+						<li><a data-toggle="pill" href="#Munchen">Munchen</a></li>
+						<li><a data-toggle="pill" href="#Brussel">Brussel</a></li>
+					</ul>
 				</div>
 				<div class="row">
-				<div id="myTabContent" class="tab-content">
-					<iframe class="tab-pane fade in active" id="Vienna" src="html/Vienna.html"></iframe>	
-					<iframe class="tab-pane fade" id="Munchen" src="html/Munchen.html"></iframe>	
-					<iframe class="tab-pane fade" id="Brussel" src="html/Brussel.html"></iframe>	
-				</div>	
+					<div id="myTabContent" class="tab-content">
+						<iframe class="tab-pane fade in active" id="Vienna" src="html/Vienna.html"></iframe>
+						<iframe class="tab-pane fade" id="Munchen" src="html/Munchen.html"></iframe>
+						<iframe class="tab-pane fade" id="Brussel" src="html/Brussel.html"></iframe>	
+					</div>	
 				</div>
 			</div>
-			<div class="col-lg-5 col-md-6 col-md-12">
+
+			<!-- <div class="col-lg-5 col-md-6 col-sm-12">
 				<div class="row">
 					<iframe id="Info-View"></iframe>
 				</div>
+			</div> -->
+
 			</div>
 		</div>
 	</div>
-	<footer class="container-fluid">
+	<!-- <footer class="container-fluid">
 		<p>Footer Text</p>
+	</footer> -->
+	<footer>
+		<div class="container" id="about">
+			<div class="footer-cols">
+			<ul class="col-lg-4 col-md-4 col-sm-12">
+				<li>About</li>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At asperiores, numquam, vel nam consectetur sint, accusantium dicta mollitia deserunt assumenda explicabo ipsum eaque autem commodi nulla quod voluptas nesciunt saepe!Repellendus, ducimus amet odit aliquid earum molestiae.</p>
+			</ul>
+	
+			<ul class="col-lg-4 col-md-4 col-sm-12">
+				<li>Goals</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+			</ul>
+	
+			<ul class="col-lg-4 col-md-4 col-sm-12">
+				<li>Data sources &amp; attribution</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+				<li>
+				<a href="#">Lorem Ipsum</a>
+				</li>
+				<li>
+				<a href="#">Lorem Ipsums</a>
+				</li>
+			</ul>
+	
+			</div>
+		</div>
+		<div class="footer-bottom text-center">
+			Olga, Lin &amp; Adebayo &copy; 2019
+		</div>
 	</footer>
 </body>
 

@@ -2,18 +2,21 @@ $(document).ready(function(){
 	var Basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ',
-			id: 'mapbox.light'
+			id: 'mapbox.light',
 		});
 	
 	var boundary = L.geoJSON(Vienna,{
 		style: {
 			color: "#000",
-			fillcolor: '#FFFAFA'
+			fillcolor: '#FFFAFA',
+			opacity: 1,
+			weight: 0.5,
 		}
 	});
 	var map = L.map('map', {
 		center: [48.210033, 16.363449],
 		zoom: 11,
+		reset: false, // important to change my map size in div along relative position
 		layers: [Basemap]
 	});	
 	var pointstyle_1 = {
@@ -136,7 +139,72 @@ $(document).ready(function(){
 			backgroundOpacity: 0,
 			position:"bottomleft",
 			changeMap: Data_Selection 
-		}).addTo(map);
+		}).addTo(map);		
+
+
+		var info = L.control();
+
+		var geojson = L.geoJson(vienna_test, { style: style, onEachFeature: onEachFeature }).addTo(map);
+
+		function onEachFeature(feature, layer) {
+			layer.on({
+				click: zoomFocus,
+				mouseover: performHover,
+				mouseout: destroyHover, 
+			});
+		}
+		
+		// Highlight Feature upon mouse focus
+		function performHover(evt) {
+			var layer = evt.target;
+		
+			layer.setStyle({
+				weight: 1,
+				color: "grey",
+				dashArray: "0",
+				fillOpacity: 0.
+			});
+		
+			if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+				layer.bringToFront();
+			}
+			info.update(layer.feature.properties);
+		}
+		
+		// zoom to feature at windows extent bounds
+		function zoomFocus(e) {
+			map.fitBounds(e.target.getBounds().pad(1.5));
+		}
+		
+		function destroyHover(e) {
+			geojson.resetStyle(e.target);
+			info.update({
+				NAME_2 : "---",
+				NAME_1 : "---",
+			});
+		
+		}
+		
+		// Update window with values
+		info.update = function(properties) {
+			document.getElementById("city").innerHTML = properties.NAME_2;
+			document.getElementById("state").innerHTML = properties.NAME_1;
+		};
+
+
+		//Create a marker layer (in the example done via a GeoJSON FeatureCollection)
+		var valencelayer = L.geoJson(Vienna_time);
+		var sliderControl = L.control.sliderControl({
+			position: "bottomright",
+			layer: valencelayer,
+			range: true
+		});
+
+		//Make sure to add the slider to the map ;-)
+		map.addControl(sliderControl);
+
+		//And initialize the slider
+		sliderControl.startSlider();
 })
 	
 	
