@@ -9,12 +9,15 @@ $(document).ready(function(){
 	var boundary = L.geoJSON(Brussel,{
 		style: {
 			color: "#000",
-			fillcolor: '#FFFAFA'
+			fillcolor: '#FFFAFA',
+			opacity: 1,
+			weight: 0.5
 		}
 	});
 	var map = L.map('map', {
 		center: [50.8505,4.3488],
 		zoom: 11,
+		reset: false, // important to change my map size in div along relative position
 		layers: [Basemap]
 	});	
 	//Sentiment points layer
