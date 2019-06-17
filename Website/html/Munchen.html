@@ -1,38 +1,69 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-	<title>Vienna</title>
+	<title>Munich</title>
 	<meta charset="utf-8" />
-	<meta name="description" content="Vienna Map View">
-	<meta name="keywords" content="Vienna,Sentiment,Twitter,Visual Analysis">
+	<meta name="description" content="Munich Map View">
+	<meta name="keywords" content="Munich,Sentiment,Twitter,Visual Analysis">
 	<meta name="author" content="Adebayo,Olga,Lin">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../CSS/Style.css">
+	<link rel="stylesheet" href="../CSS/Munchen-Style.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css">
+	
+</head>
+<body>
+	<div>
+
+		<div class="row frame-area text-center">
+			<div class="col-lg-8 col-md-7 col-sm-12">
+				<div id="map"></div>
+			</div>
+	
+			<div class="col-lg-4 col-md-5 col-sm-12">
+				<br>
+				<h2 class="metadata">METADATA</h2>
+				<div class="city others" id="city">---</div>
+				<div class="state others" id="state">---</div>
+
+				<span class="label">The city if beautiful</span>
+				<span class="label">Some random tweet</span>
+				<span class="label">The city is gorgeous</span>
+				<span class="label">Deserunt tempore incidunt?</span>
+				<span class="label">Visiting again soon</span>
+				<span class="label">An extremely beautfiul atmosphere</span>
+				<span class="label">Lorem ipsum dolor sit</span>
+				<span class="label">I was here</span>
+				<span class="label">An ever green environment</span>
+				<span class="label">Also here today</span>
+				<span class="label">Debitis labore voluptatum iusto repudiandae?</span>
+				<span class="label">Gorgeous Label</span>
+				<span class="label">Some more random tweet</span>
+				<span class="label">Another beautiful Label</span>
+				<span class="label">Some fancy label</span>
+				<span class="label">Tweet tag elements</span>
+				
+			</div>
+		</div>
+
+	</div>
+
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+	<script src="../Scripts/SliderControl.js"></script>
 	<script src="../Scripts/heatmap.js"></script>
 	<script src="../Scripts/leaflet-heatmap.js"></script>
 	<script src="../Scripts/leaflet-timeline-slider.js"></script>
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
-	<style>
-		html, body {
-			height: 100%;
-			margin: 0;
-		}
-		#map {
-			width: 100%;
-			height: 100%;
-		}
-	</style>	
-</head>
-<body>
-	<div id='map'></div>
-	<script src="../Scripts/Munchen.js"></script>
+	<!-- <script src="../JS/Vienna_test.json"></script> -->
+	<script src="../JS/Munich_tweet.json"></script>
 	<script src="../JS/Munchen.json"></script>
 	<script src="../JS/Munich_tweet_time.json"></script>
-	<script src="../JS/Munich_tweet.json"></script>
-</body>
+	<script src="../Scripts/Munchen.js"></script></body>
 </html>
