@@ -144,7 +144,7 @@ $(document).ready(function(){
 
 		var info = L.control();
 
-		var geojson = L.geoJson(vienna_test, { style: style, onEachFeature: onEachFeature }).addTo(map);
+		var geojson = L.geoJson(Vienna_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
 
 		function onEachFeature(feature, layer) {
 			layer.on({
@@ -187,8 +187,8 @@ $(document).ready(function(){
 		
 		// Update window with values
 		info.update = function(properties) {
-			document.getElementById("city").innerHTML = properties.NAME_2;
-			document.getElementById("state").innerHTML = properties.NAME_1;
+			document.getElementById("city").innerHTML = properties.BEZ;
+			document.getElementById("state").innerHTML = properties.NAMEG;
 		};
 
 
