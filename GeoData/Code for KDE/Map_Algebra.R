@@ -3,10 +3,10 @@ library(rgdal)
 library(ks)
 library(raster)
 library(geojsonio)
-Munich<-readOGR(dsn="Data/Munich",layer="Munich")
-Munich$polarity<-as.numeric(as.character(Munich$polarity))
-extent <- readOGR("Boundary/Munich.json")
-#Boundingbox of Vienna [16.179447,48.116822,16.579761,48.3249]
+Vienna <- readOGR(dsn="Data/Vienna",layer="Vienna")
+Vienna$polarity <- as.numeric(as.character(Vienna$polarity))
+extent <- readOGR("Boundary/Vienna.json")
+#Boundingbox of Vienna [16.179447, 48.116822, 16.579761, 48.3249]
 
 #Bounding box Munich [11.360777, 48.061624,	11.722908, 48.248116]
 
@@ -14,25 +14,25 @@ extent <- readOGR("Boundary/Munich.json")
 
 
 #divide the data into different months
-data1<- coordinates(subset(Munich, polarity > 0 & month == 11))
-data2<- coordinates(subset(Munich, polarity < 0 & month == 11))
+data1 <- coordinates(subset(Vienna, polarity > 0 & month == 12))
+data2 <- coordinates(subset(Vienna, polarity < 0 & month == 12))
 #calculate the bandwidth
 #SCV
 Hscv1 <- Hscv(x = data1)
 #calculate the kde
-kde1<-kde(x = data1, H =Hscv1, gridsize = rep(200, 2),xmin=c(11.360777, 48.061624), xmax=c(11.722908, 48.248116))
-result1<-raster(kde1)
+kde1<-kde(x = data1, H =Hscv1, gridsize = rep(200, 2),xmin=c(16.179447, 48.116822), xmax=c(16.579761, 48.3249))
+result1 <- raster(kde1)
 
 Hscv2 <- Hscv(x = data2)
 #calculate the kde
-kde2<-kde(x = data2, H =Hscv2, gridsize = rep(200, 2),xmin=c(11.360777, 48.061624), xmax=c(11.722908, 48.248116))
+kde2 <- kde(x = data2, H =Hscv2, gridsize = rep(200, 2),xmin=c(16.179447, 48.116822), xmax=c(16.579761, 48.3249))
 result2<-raster(kde2)
 
 raster<- result2-result1
 Algebra <- crop(raster, extent)
 Algebra <- mask(Algebra, extent)
-fun <- function(x) { x<-abs(x); x[x<100] <- 0; x[x>=100] <- 1;return (x) }
+fun <- function(x) { x<-abs(x); x[x<100] <- 0; x[x>=100] <- 1; return (x) }
 Algebra<- calc(Algebra, fun)
 pal <- colorRampPalette(c("lightgrey","yellow"))
-plot(Algebra, main="November", cex.main=4, col = pal(2), legend=FALSE)
+plot(Algebra, main="December", cex.main=4, col = pal(2), legend=FALSE)
 
