@@ -143,5 +143,80 @@ $(document).ready(function(){
 			position:"bottomleft",
 			changeMap: Data_Selection 
 		}).addTo(map);
+
+		var info = L.control();
+
+		var geojson = L.geoJson(Munchen_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
+
+		function onEachFeature(feature, layer) {
+			layer.on({
+				click: zoomFocus,
+				mouseover: performHover,
+				mouseout: destroyHover, 
+			});
+		}
+
+		function style(feature) {
+			return {
+				fillColor: "#024a74",
+				weight: 0.5,
+				opacity: 0.8,
+				color: "white",
+				dashArray: "0",
+				fillOpacity: 0.6,
+			};
+		}
+		
+		// Highlight Feature upon mouse focus
+		function performHover(evt) {
+			var layer = evt.target;
+		
+			layer.setStyle({
+				weight: 1,
+				color: "grey",
+				dashArray: "0",
+				fillOpacity: 0.
+			});
+		
+			if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+				layer.bringToFront();
+			}
+			info.update(layer.feature.properties);
+		}
+		
+		// zoom to feature at windows extent bounds
+		function zoomFocus(e) {
+			map.fitBounds(e.target.getBounds().pad(1.5));
+		}
+		
+		function destroyHover(e) {
+			geojson.resetStyle(e.target);
+			info.update({
+				NAME_2 : "---",
+				NAME_1 : "---",
+			});
+		
+		}
+		
+		// Update window with values
+		info.update = function(properties) {
+			document.getElementById("city").innerHTML = properties.NAME;
+			document.getElementById("state").innerHTML = properties.Bezirk;
+		};
+
+
+		//Create a marker layer (in the example done via a GeoJSON FeatureCollection)
+		var valencelayer = L.geoJson(Munchen_time);
+		var sliderControl = L.control.sliderControl({
+			position: "bottomright",
+			layer: valencelayer,
+			range: true
+		});
+
+		//Make sure to add the slider to the map ;-)
+		map.addControl(sliderControl);
+
+		//And initialize the slider
+		sliderControl.startSlider();
 })
 	

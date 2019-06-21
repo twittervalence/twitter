@@ -153,6 +153,17 @@ $(document).ready(function(){
 				mouseout: destroyHover, 
 			});
 		}
+
+		function style(feature) {
+			return {
+				fillColor: "#ff8a86",
+				weight: 0.5,
+				opacity: 0.8,
+				color: "white",
+				dashArray: "0",
+				fillOpacity: 0.6,
+			};
+		}
 		
 		// Highlight Feature upon mouse focus
 		function performHover(evt) {
