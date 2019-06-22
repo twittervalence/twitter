@@ -158,12 +158,12 @@ $(document).ready(function(){
 
 		function style(feature) {
 			return {
-				fillColor: "#024a74",
+				fillColor: "#6ce2ff",
 				weight: 0.5,
 				opacity: 0.8,
 				color: "white",
 				dashArray: "0",
-				fillOpacity: 0.6,
+				fillOpacity: 0.8,
 			};
 		}
 		
@@ -200,8 +200,8 @@ $(document).ready(function(){
 		
 		// Update window with values
 		info.update = function(properties) {
-			document.getElementById("city").innerHTML = properties.NAME;
-			document.getElementById("state").innerHTML = properties.Bezirk;
+			document.getElementById("city").innerHTML = properties.Bezirk;
+			document.getElementById("state").innerHTML = properties.AREA + ' Sq. Meter';
 		};
 
 

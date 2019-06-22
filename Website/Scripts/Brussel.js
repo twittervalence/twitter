@@ -150,7 +150,7 @@ $(document).ready(function(){
 
 		function style(feature) {
 			return {
-				fillColor: "#027465",
+				fillColor: "#6fdf60",
 				weight: 0.5,
 				opacity: 0.8,
 				color: "white",
@@ -193,7 +193,7 @@ $(document).ready(function(){
 		// Update window with values
 		info.update = function(properties) {
 			document.getElementById("city").innerHTML = properties.NAME_FRE;
-			document.getElementById("state").innerHTML = properties.AREA;
+			document.getElementById("state").innerHTML = properties.AREA + ' Sq. Meter';
 		};
 
 

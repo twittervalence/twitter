@@ -198,8 +198,8 @@ $(document).ready(function(){
 		
 		// Update window with values
 		info.update = function(properties) {
-			document.getElementById("city").innerHTML = properties.BEZ;
-			document.getElementById("state").innerHTML = properties.NAMEG;
+			document.getElementById("city").innerHTML =  properties.NAMEG;
+			document.getElementById("state").innerHTML = properties.AREA + ' Sq. Meter';
 		};
 
 
