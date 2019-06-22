@@ -164,10 +164,10 @@ $(document).ready(function(){
 			var layer = evt.target;
 		
 			layer.setStyle({
-				weight: 1,
+				weight: 2,
 				color: "grey",
 				dashArray: "0",
-				fillOpacity: 0.
+				fillOpacity: 0.7,
 			});
 		
 			if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -184,8 +184,8 @@ $(document).ready(function(){
 		function destroyHover(e) {
 			geojson.resetStyle(e.target);
 			info.update({
-				NAME_2 : "---",
-				NAME_1 : "---",
+				NAME_FRE : "---",
+				AREA : "---",
 			});
 		
 		}
