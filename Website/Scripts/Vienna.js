@@ -103,7 +103,14 @@ $(document).ready(function(){
 			//"Negative-Heamap":  negative_heatmapLayer
 			//"Map-algera"
 		};
-	var MapControl = L.control.layers(baseMaps,Heatmap).addTo(map);
+
+	var geojson = L.geoJson(Vienna_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
+
+	var Austria = {
+		"Austria": geojson,
+	}
+	
+	var MapControl = L.control.layers(baseMaps, Austria, Heatmap).addTo(map);
 	Data_Selection = function( {label, value}) {
 		var Heatmap_data = {
 			max: 5,
@@ -146,7 +153,6 @@ $(document).ready(function(){
 
 		var info = L.control();
 
-		var geojson = L.geoJson(Vienna_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
 
 		function onEachFeature(feature, layer) {
 			layer.on({

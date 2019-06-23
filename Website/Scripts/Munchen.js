@@ -98,12 +98,21 @@ $(document).ready(function(){
 			fillcolor: '#FFFAFA'
 		}
 	});
+	
 	var Heatmap = {
-			"Positive-Heatmap":  positive_heatmapLayer,
-			//"Negative-Heamap":  negative_heatmapLayer
-			//"Map-algera"
-		};
-	var MapControl = L.control.layers(baseMaps,Heatmap).addTo(map);
+		"Positive-Heatmap":  positive_heatmapLayer,
+		//"Negative-Heamap":  negative_heatmapLayer
+		//"Map-algera"
+	};
+
+	var geojson = L.geoJson(Munchen_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
+
+	var Munich = {
+		"Munich": geojson,
+	}
+	
+	var MapControl = L.control.layers(baseMaps, Munich, Heatmap).addTo(map);
+	
 	Data_Selection = function( {label, value}) {
 		var Heatmap_data = {
 			max: 5,
@@ -146,7 +155,7 @@ $(document).ready(function(){
 
 		var info = L.control();
 
-		var geojson = L.geoJson(Munchen_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
+		// var geojson = L.geoJson(Munchen_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
 
 		function onEachFeature(feature, layer) {
 			layer.on({
@@ -241,7 +250,7 @@ $(document).ready(function(){
 
 
 		//Create a marker layer (in the example done via a GeoJSON FeatureCollection)
-		var valencelayer = L.geoJson(Munchen_time);
+		var valencelayer = L.geoJson(Munich_time);
 		var sliderControl = L.control.sliderControl({
 			position: "bottomright",
 			layer: valencelayer,

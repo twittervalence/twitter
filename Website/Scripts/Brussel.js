@@ -97,8 +97,16 @@ $(document).ready(function(){
 			"Positive-Heatmap":  positive_heatmapLayer,
 			//"Negative-Heamap":  negative_heatmapLayer
 			//"Map-algera"
-		};
-	var MapControl = L.control.layers(baseMaps,Heatmap).addTo(map);
+	};
+
+	var geojson = L.geoJson(Brussel_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
+
+	var Brussels = {
+		"Brussels": geojson,
+	}
+	
+	var MapControl = L.control.layers(baseMaps, Brussels, Heatmap).addTo(map);
+
 	Data_Selection = function( {label, value}) {
 		var Heatmap_data = {
 			max: 5,
@@ -138,7 +146,7 @@ $(document).ready(function(){
 
 		var info = L.control();
 
-		var geojson = L.geoJson(Brussel_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
+		// var geojson = L.geoJson(Brussel_dist, { style: style, onEachFeature: onEachFeature }).addTo(map);
 
 		function onEachFeature(feature, layer) {
 			layer.on({
@@ -233,7 +241,7 @@ $(document).ready(function(){
 
 
 		//Create a marker layer (in the example done via a GeoJSON FeatureCollection)
-		var valencelayer = L.geoJson(Vienna_time);
+		var valencelayer = L.geoJson(Brussel_time);
 		var sliderControl = L.control.sliderControl({
 			position: "bottomright",
 			layer: valencelayer,

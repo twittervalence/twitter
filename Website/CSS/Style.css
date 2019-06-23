@@ -205,9 +205,15 @@ footer .footer-bottom {
 	padding: 1rem;
 }
 
-footer .footer-cols ul li a, footer .footer-cols ul p {
+footer .footer-cols ul li a {
 	text-decoration: none;
-	color: #ccc;
+	color: #979797;
+}
+
+footer .footer-cols ul p {
+    text-decoration: none;
+    text-align: justify;
+    color: #979797;
 }
   
 /* Footer end */
