@@ -223,7 +223,7 @@ footer .footer-cols ul li a, footer .footer-cols ul p {
     grid-template-columns: 1fr 2fr;
     padding: 30px;
     margin: 30px;
-    background-color: #f7f7f7;
+    background-color: #fcfcfc;
     font-family: 'Quattrocento', sans-serif;
 }
 
@@ -232,6 +232,7 @@ footer .footer-cols ul li a, footer .footer-cols ul p {
     justify-content: left;
     align-items: center;
     text-align: left;
+    font-family: 'Lato', sans-serif;
 }
 
 .proj-details {

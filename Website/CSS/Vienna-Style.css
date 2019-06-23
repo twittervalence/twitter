@@ -27,3 +27,11 @@ html, body {
     padding: 5px;
     margin: 2px;
 }
+
+#cloud {
+    display: inline-block;
+    font-size: 0.9em;
+    padding: 5px;
+    margin-top: 10px;
+    margin: 2px;
+}
