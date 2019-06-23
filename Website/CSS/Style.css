@@ -124,18 +124,26 @@ nav a#openup {
 
 #Vienna {
 	width:100%;
-	height: 600px;
-	margin: 0;
+	height: 601px;
+    margin: 0;
+    overflow-y: hidden;
+    border: none;
 }
 
 #Munchen {
 	width: 100%;
-	height:500px;
+    height:601px;
+    margin: 0;
+    overflow-y: hidden;
+    border: none;
 }
 
 #Brussel {
 	width:100%;
-	height:500px;
+    height:601px;
+    margin: 0;
+    overflow-y: hidden;
+    border: none;
 }
 
 #Info-View {
@@ -337,7 +345,20 @@ footer .footer-cols ul p {
 	footer .footer-cols {
 		margin-top: 20px;
 		text-align: center;
-	}
+    }
+    
+    #Vienna {
+        height: 900px;
+    }
+    
+    #Munchen {
+        height:900px;
+    }
+    
+    #Brussel {
+        height:900px;
+    }
+    
 }
 
 /* For 780 wide screens */
